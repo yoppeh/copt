@@ -33,7 +33,7 @@ endif
 CFGLAGS += -I/usr/include
 LDFLAGS += -L/usr/lib -Tcopt.ld
 ifdef debug
-CFLAGS += -g3 -D debug
+CFLAGS += -ggdb -D DEBUG
 LDFLAGS += -v
 else
 CFLAGS += -O3 -flto
@@ -51,6 +51,9 @@ all: test
 
 test: main.o libcopt.a
 	$(CC) $(LDFLAGS) $^ -o $@
+ifndef debug
+	strip $@
+endif
 
 libcopt.a: $(OBJS) copt.h
 	ar cr $@ $(OBJS)
