@@ -47,7 +47,7 @@ OBJS = copt.o
 
 .PHONY: all clean install uninstall
 
-all: test
+all: clean install test uninstall
 
 test: main.o libcopt.a
 	$(CC) $(LDFLAGS) $^ -o $@
